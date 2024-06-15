@@ -1,0 +1,107 @@
+var a=false;
+$(document).ready(function(){
+$("#btn_save").click(function(){
+  if(a==false){
+    
+    saveperform();
+   }
+  }); 
+});
+
+
+ function saveperform() 
+{ 
+    var name=$('#name').val();
+    var birthdate=$('#birthdate').val();
+    var email=$('#email').val();
+    var website=$('#website').val();
+    var insta_id=$('#insta_id').val();
+    var twitter_id=$('#twitter_id').val();
+    var fb_id=$('#fb_id').val();
+    var company_name=$('#company_name').val();
+    var cperson_name=$('#cperson_name').val();
+    var contact_no=$('#contact_no').val();
+    var gender=$('#gender').val();
+    var address=$('#address').val();
+    var photo=$('#photo').val();
+    
+
+    
+
+
+    if(name==""|| birthdate==""|| email==""||  website==""||  insta_id==""||  twitter_id==""|| fb_id==""|| company_name==""||  cperson_name==""||  contact_no==""|| gender==""||  address==""|| photo=="") 
+    {
+      alert("requird");
+        swal({
+        title:"",
+        text:"Please Enter Required Fields",
+        type:"error",           
+    });   
+  }
+
+    // else
+    // {
+    // 	if(userId>0)
+    	// {
+      //       a=true;
+    	
+    		// $.ajax({
+      //   url:base_path+"Country/updateCountry",
+      //   type: "POST",
+      //   data: $('#Form').serialize(),
+      //    beforeSend: function(){
+      //          $('#btn_save').prop('disabled', true);
+      //          $('#btn_save').html('Loading');
+      //     }, 
+      //   success: function(data) {
+      //      $('#btn_save').prop('disabled', false);
+      //      $('#btn_save').html('<img src="'+base_path+'assets/images/save.png" width="21"> Save');
+             
+      //       swal({
+      //       title:"",
+      //       text:"Data Submitted Successfully",
+      //       type:"success",
+      //       showCancelButton: true, 
+      //       showConfirmButton: false,
+      //       timer:10000
+      //   }); a=false;
+      //       window.location.href = base_path+"Country";
+      //     }
+      // });
+    	// }
+        else
+    	{a=true;
+    		
+    		$.ajax({
+        url:base_path+"Composer/insertComposer",
+        type: "POST",
+        data: $('#Form').serialize(),
+         beforeSend: function(){
+               $('#btn_save').prop('disabled', true);
+               $('#btn_save').html('Loading');
+          }, 
+        success: function(data) {
+
+            $('#btn_save').prop('disabled', false);
+           $('#btn_save').html('Save');
+             $("#Form").trigger("reset");
+
+             // alert("hi");
+          swal({
+            title:"",
+            text:"Data Submitted Successfully",
+            type:"success",
+            showCancelButton: false, 
+            showConfirmButton: false,
+             width: '1000px',
+            timer:1000
+        });
+           $('#Form').parsley().destroy();
+           $('#Form').parsley();
+           a=false;
+
+                }
+      });
+    	}
+      }
+ // }
